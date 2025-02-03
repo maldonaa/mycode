@@ -22,7 +22,8 @@ def main():
     for instance in fog['imdata']:
         # each time through the loop "get" the version and display it
         print("Firmware version running - ", instance.get('firmwareCtrlrRunning').get('attributes').get('version'))
-
+        print( instance.keys() )
+        print( instance.values() )
 # best practice technique to call our python script
 if __name__ == "__main__":
     main()     # calls the "main" function to run
