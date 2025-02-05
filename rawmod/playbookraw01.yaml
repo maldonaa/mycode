@@ -6,9 +6,21 @@
   # forks: 5              # how many simultaneous connections (default 5)
 
   tasks:
+  - name: List a file over an SSH channel
+    raw: ls newfile01.txt
+    register: command_output_1
+
+  - debug: msg="{{ command_output_1.stdout_lines}}"
+
   - name: Create a file over an SSH channel
     raw: echo $HOSTNAME > newfile01.txt
+    when: msg == ""
+
+  - name: List a second file over an SSH channel
+    raw: ls newfile02.txt
+ 
+  - debug: msg="{{ command_output_2.stdout_lines}}"
 
   - name: Create a second file over an SSH channel
     raw: echo "Hello world" > newfile02.txt
-
+    when: msg == ""
